@@ -12,8 +12,8 @@ class DogBloc extends Bloc<DogEvent, DogState> {
       try {
         final dogs = await dogRepository.fetchDogs();
         emit(DogLoaded(dogs: dogs));
-      } catch (_) {
-        emit(DogError());
+      } catch (e) {
+        emit(DogError(message: e.toString()));
       }
     });
   }

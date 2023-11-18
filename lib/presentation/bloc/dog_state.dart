@@ -7,9 +7,13 @@ class DogInitial extends DogState {}
 class DogLoading extends DogState {}
 
 class DogLoaded extends DogState {
- final List<DogModel> dogs;
+  final List<DogModel> dogs;
 
- DogLoaded({required this.dogs});
+  DogLoaded({required this.dogs});
 }
 
-class DogError extends DogState {}
+class DogError extends DogState {
+  final String message;
+
+  DogError({required this.message});
+}
