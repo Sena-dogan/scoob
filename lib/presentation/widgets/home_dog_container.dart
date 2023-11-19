@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:scoob/presentation/widgets/breed_text_widget.dart';
+import 'package:scoob/presentation/widgets/dog_dialog.dart';
 
 class HomeDogContainer extends StatelessWidget {
   final String breed;
@@ -7,47 +9,32 @@ class HomeDogContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 163.5,
-      width: 163.5,
-      child: Stack(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.asset(
-              'assets/images/huskyy.jpg',
-              fit: BoxFit.cover,
-              height: 163.5,
-              width: 163.5,
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Container(
-                width: 130,
-                height: 38,
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.24),
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(16),
-                    bottomLeft: Radius.circular(8),
-                  ),
-                ),
-                child: Center(
-                  child: Text(
-                    breed,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return DogDialog(breed: breed);
+          },
+        );
+      },
+      child: SizedBox(
+        height: 163.5,
+        width: 163.5,
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(
+                'assets/images/huskyy.jpg',
+                fit: BoxFit.cover,
+                height: 163.5,
+                width: 163.5,
               ),
             ),
-          ),
-        ],
+            BreedTextWidget(breed: breed),
+          ],
+        ),
       ),
     );
   }
