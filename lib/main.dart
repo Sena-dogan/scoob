@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
         title: 'Scoob App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 121, 87, 182)),
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color.fromARGB(255, 121, 87, 182)),
           useMaterial3: true,
         ),
         home: const HomePage(),
