@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scoob/presentation/bloc/dog_bloc.dart';
 import 'package:scoob/presentation/bloc/dog_event.dart';
 import 'package:scoob/presentation/bloc/dog_state.dart';
+import 'package:scoob/presentation/widgets/bottom_nav_bar.dart';
 import 'package:scoob/presentation/widgets/home_dog_container.dart';
+import 'package:scoob/presentation/widgets/search_bar_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -15,6 +17,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(
           'Scoob',
           style: TextStyle(
@@ -24,25 +27,35 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      body: BlocBuilder<DogBloc, DogState>(
-        builder: (context, state) {
-          if (state is DogLoading) {
-            return const CircularProgressIndicator();
-          } else if (state is DogLoaded) {
-            return GridView.count(
-              primary: false,
-              padding: const EdgeInsets.all(16),
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              crossAxisCount: 2,
-              children: state.dogs.map((dog) => HomeDogContainer(breed: dog.breed)).toList(),
-            );
-          } else if (state is DogError) {
-            return const Text('Something went wrong!');
-          } else {
-            return Container();
-          }
-        },
+      body: Stack(
+        children: [
+          BlocBuilder<DogBloc, DogState>(
+            builder: (context, state) {
+              if (state is DogLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is DogLoaded) {
+                return GridView.count(
+                  primary: false,
+                  padding: const EdgeInsets.all(16),
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  crossAxisCount: 2,
+                  children: state.dogs
+                      .map((dog) => HomeDogContainer(breed: dog.breed))
+                      .toList(),
+                );
+              } else if (state is DogError) {
+                return const Text('Something went wrong!');
+              } else {
+                return Container();
+              }
+            },
+          ),
+          const SearchBarWidget(),
+        ],
+      ),
+      bottomNavigationBar: const BottomNavBar(
+        selectedIndex: 0,
       ),
     );
   }
