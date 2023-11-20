@@ -16,7 +16,7 @@ class HomeDogContainer extends StatelessWidget {
         showDialog(
           context: context,
           builder: (BuildContext context) {
-            return DogDialog(breed: dog.breed);
+            return DogDialog(dog: dog,);
           },
         );
       },

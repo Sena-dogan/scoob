@@ -12,41 +12,13 @@ class DogRepository {
     if (response.statusCode == 200) {
       var allDogs = (json.decode(response.body) as Map<String, dynamic>);
       var dogsList = await Future.wait(
-        allDogs['message'].keys.map<Future<DogModel>>((x) async {
-          var dogImage = await fetchDogImage(x);
-          if (dogImage.status != 'success') {
-            // Print the request URL
-            debugPrint(
-                "Fetch Image Request: https://dog.ceo/api/breed/$x/images/random");
-            // Skip if image is not available
-            return DogModel(
-              breed: x,
-              image: null,
-            );
-          }
-
-          // Check if dog image message url is exist
-          // Because even if the status is success, and the message is not null
-          // The message url of the image can be lead to 404
-          // So we need to check if the message url is exist
-          // if exist, we check if the status is 404 or not
-          // if not, we return the dog model
-          // if exist, we return null
-          if (dogImage.message != null) {
-            var dogImageResponse = await http.get(Uri.parse(dogImage.message!));
-            if (dogImageResponse.statusCode == 404) {
-              // Print the request URL
-              debugPrint("Fetch Image Request: ${dogImage.message}");
-              // Skip if image is not available
-              return DogModel(
-                breed: x,
-                image: null,
-              );
-            }
-          }
+        allDogs['message'].keys.map<Future<DogModel>>((breed) async {
+          DogSubBreed? dogSubBreed = await fetchDogSubBreeds(breed);
+          DogImage? dogImage = await fetchDogImage(breed);
 
           return DogModel(
-            breed: x,
+            breed: breed,
+            subBreed: dogSubBreed,
             image: dogImage.message,
           );
         }),
@@ -64,7 +36,32 @@ class DogRepository {
     final response = await http
         .get(Uri.parse('https://dog.ceo/api/breed/$breed/images/random'));
     if (response.statusCode == 200) {
-      return DogImage.fromJson(json.decode(response.body));
+      var dogImage = DogImage.fromJson(json.decode(response.body));
+
+      if (dogImage.status != 'success') {
+        // Print the request URL
+        debugPrint(
+            "Fetch Image Request: https://dog.ceo/api/breed/$breed/images/random");
+        // Skip if image is not available
+        return DogImage(
+          message: null,
+          status: null,
+        );
+      } else {
+        if (dogImage.message != null) {
+          var dogImageResponse = await http.get(Uri.parse(dogImage.message!));
+          if (dogImageResponse.statusCode == 404) {
+            // Print the request URL
+            debugPrint("Fetch Image Request: ${dogImage.message}");
+            // Skip if image is not available
+            return DogImage(
+              message: null,
+              status: null,
+            );
+          }
+        }
+        return dogImage;
+      }
     } else {
       debugPrint(
           "Fetch Image Request: https://dog.ceo/api/breed/$breed/images/random");
@@ -73,12 +70,13 @@ class DogRepository {
     }
   }
 
-  Future<List<String>> fetchDogSubBreeds(String breed) async {
+  Future<DogSubBreed> fetchDogSubBreeds(String breed) async {
     final response =
         await http.get(Uri.parse('https://dog.ceo/api/breed/$breed/list'));
     if (response.statusCode == 200) {
       var dogSubBreed = DogSubBreed.fromJson(json.decode(response.body));
-      return dogSubBreed.message!;
+      debugPrint("$breed has ${dogSubBreed.message?.length} sub breeds");
+      return dogSubBreed;
     } else {
       debugPrint(
           "Fetch Sub Breed Request: https://dog.ceo/api/breed/$breed/list");
