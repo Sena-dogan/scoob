@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scoob/data/repository/dog_repository.dart';
 import 'package:scoob/presentation/bloc/dog_event.dart';
@@ -10,9 +11,10 @@ class DogBloc extends Bloc<DogEvent, DogState> {
     on<FetchDogs>((event, emit) async {
       emit(DogLoading());
       try {
-        final dogs = await dogRepository.fetchDogs();
+        var dogs = await dogRepository.fetchDogs();
         emit(DogLoaded(dogs: dogs));
       } catch (e) {
+        debugPrint("DogBloc: ${e.toString()}");
         emit(DogError(message: e.toString()));
       }
     });

@@ -1,11 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:scoob/data/model/dog_model.dart';
 import 'package:scoob/presentation/widgets/breed_text_widget.dart';
 import 'package:scoob/presentation/widgets/dog_dialog.dart';
 
 class HomeDogContainer extends StatelessWidget {
-  final String breed;
+  final DogModel dog;
 
-  const HomeDogContainer({super.key, required this.breed});
+  const HomeDogContainer({super.key, required this.dog});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,7 @@ class HomeDogContainer extends StatelessWidget {
         showDialog(
           context: context,
           builder: (BuildContext context) {
-            return DogDialog(breed: breed);
+            return DogDialog(breed: dog.breed);
           },
         );
       },
@@ -25,14 +27,16 @@ class HomeDogContainer extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                'assets/images/huskyy.jpg',
-                fit: BoxFit.cover,
-                height: 163.5,
-                width: 163.5,
-              ),
+              child: CachedNetworkImage(
+                  imageUrl: dog.image ?? '',
+                  fit: BoxFit.cover,
+                  height: 163.5,
+                  width: 163.5,
+                  errorWidget: (context, msg, object) => const Center(
+                        child: Icon(Icons.error_outline_outlined),
+                      )),
             ),
-            BreedTextWidget(breed: breed),
+            BreedTextWidget(breed: dog.breed),
           ],
         ),
       ),

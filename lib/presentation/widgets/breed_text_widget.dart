@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scoob/utils/extensions/string_extension.dart';
 
 class BreedTextWidget extends StatelessWidget {
   const BreedTextWidget({
@@ -15,7 +16,7 @@ class BreedTextWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(bottom: 8),
         child: Container(
-          width: 130,
+          width: 150,
           height: 38,
           decoration: BoxDecoration(
             color: Colors.black.withOpacity(0.24),
@@ -26,10 +27,12 @@ class BreedTextWidget extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              breed,
+              breed.capitalize(),
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 14,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                
               ),
             ),
           ),
