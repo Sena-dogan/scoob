@@ -21,8 +21,6 @@ class HomePage extends StatelessWidget {
     }
 
     return BlocBuilder<DogBloc, DogState>(builder: (context, state) {
-      debugPrint(
-          "Size: ${MediaQuery.sizeOf(context).width} x ${MediaQuery.sizeOf(context).height}");
       if (state is DogLoading) {
         return const SplashScreen();
       }
