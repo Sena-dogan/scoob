@@ -12,33 +12,59 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: selectedIndex,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
+    return SizedBox(
+      height: 98,
+      child: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        selectedLabelStyle: const TextStyle(
+          color: Color(0xFF0054D3),
+          fontSize: 11,
+          fontFamily: 'Galano Grotesque',
+          fontWeight: FontWeight.w600,
+          height: 0,
+          letterSpacing: 0.22,
         ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.settings,
+        unselectedLabelStyle: const TextStyle(
+          color: Colors.black,
+          fontSize: 11,
+          fontFamily: 'Galano Grotesque',
+          fontWeight: FontWeight.w600,
+          height: 0,
+          letterSpacing: 0.22,
+        ),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
-          label: 'Settings',
-        ),
-      ],
-      onTap: (index) {
-        if (index == 0) {
-          Navigator.pushReplacement(
-            context,
-            switchTransition(() => const HomePage()),
-          );
-        } else if (index == 1) {
-          Navigator.push(
-            context,
-            switchTransition(() => const SettingsPage()),
-          );
-        }
-      },
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.settings,
+            ),
+            label: 'Settings',
+          ),
+        ],
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.pushReplacement(
+              context,
+              switchTransition(() => const HomePage()),
+            );
+          } else if (index == 1) {
+            if (Navigator.canPop(context)) {
+              Navigator.pop(context);
+            } else {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => const SettingsPage(),
+                isScrollControlled: true,
+                useSafeArea: true,
+                useRootNavigator: true,
+              );
+            }
+          }
+        },
+      ),
     );
   }
 
