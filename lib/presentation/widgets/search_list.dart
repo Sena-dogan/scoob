@@ -15,8 +15,9 @@ class SearchList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return SizedBox(
-      height: 700,
+      height: size.height * 0.8,
       child: SearchableList<DogModel>(
         initialList: widget.dogs,
         emptyWidget: const Center(
