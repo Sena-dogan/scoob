@@ -52,7 +52,7 @@ class DogRepository {
           var dogImageResponse = await http.get(Uri.parse(dogImage.message!));
           if (dogImageResponse.statusCode == 404) {
             // Print the request URL
-            debugPrint("Fetch Image Request: ${dogImage.message}");
+            debugPrint("404 Fetch Image Request: ${dogImage.message}");
             // Skip if image is not available
             return DogImage(
               message: null,

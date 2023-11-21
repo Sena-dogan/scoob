@@ -15,106 +15,134 @@ class DogDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.8,
-      width: MediaQuery.of(context).size.width * 0.8,
+      height: MediaQuery.of(context).size.height * 0.9,
+      width: MediaQuery.of(context).size.width * 0.9,
       child: AlertDialog(
         contentPadding: const EdgeInsets.all(0),
         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
-        content: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      topRight: Radius.circular(12),
+                    ),
+                    child: Image.network(
+                      dog.image ?? '',
+                      fit: BoxFit.cover,
+                      height: 343,
+                      width: 343,
+                    ),
+                  ),
+                  Positioned(
+                    top: 16,
+                    right: 16,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        width: 32,
+                        height: 32,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.close_rounded,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              child: Image.network(
-                dog.image ?? '',
-                fit: BoxFit.cover,
-                height: 343,
-                width: 343,
-              ),
-            ),
-            const SizedBox(height: 12),
-            const Text(
-              'Breed',
-              style: TextStyle(
-                color: Color(0xFF0055D3),
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const Divider(
-              color: Color(0xFFE5E5EA),
-              thickness: 2,
-              height: 2,
-              indent: 30,
-              endIndent: 30,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                dog.breed.capitalize(),
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+              const SizedBox(height: 12),
+              const Text(
+                'Breed',
+                style: TextStyle(
+                  color: Color(0xFF0055D3),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-            ),
-            const Text(
-              'Sub Breed',
-              style: TextStyle(
-                color: Color(0xFF0055D3),
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
+              const Divider(
+                color: Color(0xFFE5E5EA),
+                thickness: 2,
+                height: 2,
+                indent: 30,
+                endIndent: 30,
               ),
-            ),
-            const Divider(
-              color: Color(0xFFE5E5EA),
-              thickness: 2,
-              height: 2,
-              indent: 30,
-              endIndent: 30,
-            ),
-            SizedBox(
-              height: 150,
-              width: 343,
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: dog.subBreed!.message!.isEmpty
-                    ? 1
-                    : dog.subBreed?.message?.length,
-                itemBuilder: (context, index) {
-                  if (dog.subBreed?.message?.isEmpty ?? true) {
-                    return const Center(
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  dog.breed.capitalize(),
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              const Text(
+                'Sub Breed',
+                style: TextStyle(
+                  color: Color(0xFF0055D3),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const Divider(
+                color: Color(0xFFE5E5EA),
+                thickness: 2,
+                height: 2,
+                indent: 30,
+                endIndent: 30,
+              ),
+              SizedBox(
+                height: 150,
+                width: 343,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: dog.subBreed!.message!.isEmpty
+                      ? 1
+                      : dog.subBreed?.message?.length,
+                  itemBuilder: (context, index) {
+                    if (dog.subBreed?.message?.isEmpty ?? true) {
+                      return const Center(
+                        child: Text(
+                          'No Sub Breed',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      );
+                    }
+                    return Center(
                       child: Text(
-                        'No Sub Breed',
-                        style: TextStyle(
+                        dog.subBreed?.message?[index].capitalize() ??
+                            'Sub Breed',
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                     );
-                  }
-                  return Center(
-                    child: Text(
-                      dog.subBreed?.message?[index].capitalize() ?? 'Sub Breed',
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  );
-                },
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         actions: <Widget>[
           SizedBox(

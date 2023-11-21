@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scoob/data/model/dog_model.dart';
 import 'package:scoob/presentation/widgets/breed_text_widget.dart';
@@ -13,7 +14,7 @@ class HomeDogContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        showDialog(
+        showCupertinoModalPopup(
           context: context,
           builder: (BuildContext context) {
             return DogDialog(dog: dog,);
