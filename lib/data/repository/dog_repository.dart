@@ -70,6 +70,7 @@ class DogRepository {
             );
           }
         }
+        /// This is the end of the block of code that you can remove!
         return dogImage;
       }
     } else {

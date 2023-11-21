@@ -20,7 +20,7 @@ class SplashScreen extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.asset(
-              'assets/images/huskyy.jpg',
+              'assets/images/scoob_icon.jpeg',
               fit: BoxFit.cover,
             ),
           ),
