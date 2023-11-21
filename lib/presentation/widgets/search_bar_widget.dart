@@ -107,8 +107,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                                             Navigator.pop(context);
                                             showDialog(
                                               context: context,
-                                              builder:
-                                                  (BuildContext context) {
+                                              builder: (BuildContext context) {
                                                 return DogDialog(
                                                   dog: filteredDogs[index],
                                                 );
@@ -123,6 +122,12 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                                               fit: BoxFit.cover,
                                               height: 50,
                                               width: 50,
+                                              errorBuilder:
+                                                  (context, msg, object) =>
+                                                      const Icon(
+                                                Icons.error_outline_outlined,
+                                                size: 20,
+                                              ),
                                             ),
                                           ),
                                           title: Text(

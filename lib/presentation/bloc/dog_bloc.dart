@@ -15,7 +15,6 @@ class DogBloc extends Bloc<DogEvent, DogState> {
         emit(DogLoaded(dogs: dogs));
       } catch (e) {
         debugPrint("DogBloc: ${e.toString()}");
-        emit(DogError(message: e.toString()));
       }
     });
   }

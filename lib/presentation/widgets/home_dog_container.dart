@@ -17,7 +17,9 @@ class HomeDogContainer extends StatelessWidget {
         showCupertinoModalPopup(
           context: context,
           builder: (BuildContext context) {
-            return DogDialog(dog: dog,);
+            return DogDialog(
+              dog: dog,
+            );
           },
         );
       },
@@ -34,7 +36,16 @@ class HomeDogContainer extends StatelessWidget {
                   height: 163.5,
                   width: 163.5,
                   errorWidget: (context, msg, object) => const Center(
-                        child: Icon(Icons.error_outline_outlined),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.error_outline_outlined),
+                            Text(
+                              "This Dog's Image is Missing.",
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
                       )),
             ),
             BreedTextWidget(breed: dog.breed),

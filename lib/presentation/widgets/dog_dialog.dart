@@ -39,6 +39,21 @@ class DogDialog extends StatelessWidget {
                       fit: BoxFit.cover,
                       height: 343,
                       width: 343,
+                      errorBuilder: (context, msg, object) => const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.error_outline_outlined),
+                              Text(
+                                "This Dog's Image is Missing.",
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   Positioned(
@@ -167,6 +182,26 @@ class DogDialog extends StatelessWidget {
                                           fit: BoxFit.cover,
                                           height: 256,
                                           width: 256,
+                                          errorBuilder:
+                                              (context, msg, object) =>
+                                                  const Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 20),
+                                            child: Center(
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(Icons
+                                                      .error_outline_outlined),
+                                                  Text(
+                                                    "This Dog's Image is Missing.",
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),

@@ -48,6 +48,16 @@ class DogRepository {
           status: null,
         );
       } else {
+
+        /// Fetches the dog image from the provided URL in [dogImage.message].
+        /// If the image is not available (404 status code), 
+        /// it returns a [DogImage] object with null values.
+        /// Otherwise, it returns the fetched [DogImage] object.
+        /// 
+        /// You can remove this block of code if you want to show the breeds
+        /// with missing images.
+        /// If image is missing ui will show a error icon and a text.
+        /// Everything will work fine. :))))
         if (dogImage.message != null) {
           var dogImageResponse = await http.get(Uri.parse(dogImage.message!));
           if (dogImageResponse.statusCode == 404) {
