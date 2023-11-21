@@ -33,12 +33,12 @@ best problem solver :)
 
 #### Scoob App Icon
 
-![Scoob App Icon](https://github.com/Sena-dogan/scoob/assets/93337596/8f8e753b-8cc6-46ea-8453-3e0338ac83d5)
+![Scoob App Icon](https://github.com/Sena-dogan/scoob/assets/93337596/42b91871-0709-456c-a21b-8dad8b033404)
 
 
 ## Screenshots
 
-![Screenshots](https://github.com/Sena-dogan/scoob/assets/93337596/da96205c-39da-4b5e-a6ef-7ec3b8f57999)
+![Screenshots](https://github.com/Sena-dogan/scoob/assets/93337596/3673885d-00ce-400e-a96c-6ffa3ef5db19)
 
 
 ### Overview
@@ -46,6 +46,7 @@ best problem solver :)
 In the process of developing this application, I encountered an issue related to the Dog API images. Despite receiving a "success" status when fetching pictures from the provided Dog API, certain images resulted in a "404 Not Found" error when attempting to access their links. I attribute this discrepancy to outdated images within the Dog API.
 
 To address this issue, I've implemented a specific error-handling mechanism in the "lib/data/repository/dog_repository.dart" file. Below is an explanation of the related code:
+
 
 ```dart
         /// Fetches the dog image from the provided URL in [dogImage.message].
@@ -72,6 +73,7 @@ To address this issue, I've implemented a specific error-handling mechanism in t
         /// This is the end of the block of code that you can remove!
         return dogImage;
 ```
+
 In the above code snippet, I've introduced an error check to ensure that the image URL does not return a "404 Not Found" error before processing the data. If an invalid image is detected, the associated dog breed is excluded from the listing to enhance the overall user experience.
 
 Important Note
