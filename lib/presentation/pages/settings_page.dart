@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:scoob/presentation/widgets/bottom_nav_bar.dart';
 
@@ -60,7 +62,9 @@ class SettingsPage extends StatelessWidget {
             ),
             title: const Text('OS Version'),
             trailing: Text(
-              '17.0.3',
+              Platform.isAndroid
+                  ? 'Android ${Platform.operatingSystemVersion.split(' ')[2]}'
+                  : 'iOS ${Platform.operatingSystemVersion.split(' ')[1]}',
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
