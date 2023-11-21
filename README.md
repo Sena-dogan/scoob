@@ -1,16 +1,42 @@
 # scoob
 
-A new Flutter project.
+A Dog Breeds App.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a case study for AppNation by Zeynep Sena Doğan.
 
-A few resources to get you started if this is your first Flutter project:
+## Getting Started
+Get packages
+```bash
+flutter pub get
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Run the app
+```bash
+flutter run
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Posible Errors
+If you dont have generated files, you can generate them with this command
+```bash
+flutter pub run build_runner build
+```
+
+and of cousres if you have any error, you can clean the project with this command
+```bash
+flutter clean 
+```
+best problem solver :)
+
+## App Photos
+
+#### Scoob App Icon
+
+![Scoob App Icon](https://github.com/Sena-dogan/scoob/assets/93337596/8f8e753b-8cc6-46ea-8453-3e0338ac83d5)
+
+
+## Screenshots
+
+![Screenshots](https://github.com/Sena-dogan/scoob/assets/93337596/da96205c-39da-4b5e-a6ef-7ec3b8f57999)
+
