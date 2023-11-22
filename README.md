@@ -34,7 +34,7 @@ best problem solver :)
 
 #### Scoob App Icon
 
-![Scoob App Icon](assets/images/ScoobAppIcon.jpg)
+![Scoob App Icon](assets/images/ScoobAppIcon.png)
 
 
 
