@@ -77,4 +77,4 @@ To handle this situation, I've implemented a conditional statement in the "lib/d
 
 In the code, I've included a comment explaining this situation. If the specified code block is removed, all dog breeds will be listed, including those whose images are no longer accessible. However, if the code remains unchanged, only the dog breeds with valid images will be displayed.
 
-Please let me know if you need further changes. If you have any questions or need further clarification, you can contact me :))
+Please let me know if you need further changes. If you have any questions or need further clarification, you can contact me :)
