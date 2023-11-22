@@ -29,9 +29,9 @@ flutter clean
 ```
 best problem solver :)
 
-## App Photos
+#### App Photos
 
-#### Scoob App Icon
+## Scoob App Icon
 
 ![Scoob App Icon](https://github.com/Sena-dogan/scoob/assets/93337596/42b91871-0709-456c-a21b-8dad8b033404)
 
@@ -43,9 +43,9 @@ best problem solver :)
 
 ### Overview
 
-In the process of developing this application, I encountered an issue related to the Dog API images. Despite receiving a "success" status when fetching pictures from the provided Dog API, certain images resulted in a "404 Not Found" error when attempting to access their links. I attribute this discrepancy to outdated images within the Dog API.
+It's important to note that while the status indicates success when retrieving images from the Dog API, attempting to access the URL of certain images results in a "404 Not Found" error. This is likely due to the images being outdated.
 
-To address this issue, I've implemented a specific error-handling mechanism in the "lib/data/repository/dog_repository.dart" file. Below is an explanation of the related code:
+To handle this situation, I've implemented a conditional statement in the "lib/data/repository/dog_repository.dart" file. This statement is designed to manage the scenario where the image URL is no longer valid.
 
 
 ```dart
@@ -74,9 +74,6 @@ To address this issue, I've implemented a specific error-handling mechanism in t
         return dogImage;
 ```
 
-In the above code snippet, I've introduced an error check to ensure that the image URL does not return a "404 Not Found" error before processing the data. If an invalid image is detected, the associated dog breed is excluded from the listing to enhance the overall user experience.
+In the code, I've included a comment explaining this situation. If the specified code block is removed, all dog breeds will be listed, including those whose images are no longer accessible. However, if the code remains unchanged, only the dog breeds with valid images will be displayed.
 
-Important Note
-Removing or altering this error-handling logic will result in displaying all dog breeds, including those with images that lead to a "404 Not Found" error. The current implementation aims to filter out breeds with incorrect images to provide users with a more reliable and visually appealing application.
-
-Feel free to review and modify this error-handling mechanism based on your preferences or specific requirements. If you have any questions or need further clarification, you can contact me :))
+Please let me know if you need further changes. If you have any questions or need further clarification, you can contact me :))
