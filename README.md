@@ -34,13 +34,13 @@ best problem solver :)
 
 #### Scoob App Icon
 
-![Scoob App Icon](https://github.com/Sena-dogan/scoob/assets/93337596/7dade971-e1e6-484b-a96f-52a2598c3244)
+![Scoob App Icon](assets/images/ScoobAppIcon.jpg)
 
 
 
 #### Screenshots
 
-![Screenshots](https://github.com/Sena-dogan/scoob/assets/93337596/a5e44d0b-b2e1-49c9-af61-08a158f19de7)
+![Screenshots](assets/images/Screenshots.png)
 
 
 
