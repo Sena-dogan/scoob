@@ -30,14 +30,14 @@ flutter clean
 best problem solver :)
 
 
-#### App Photos
+## App Photos
 
-## Scoob App Icon
+#### Scoob App Icon
 
 ![Scoob App Icon](https://github.com/Sena-dogan/scoob/assets/93337596/42b91871-0709-456c-a21b-8dad8b033404)
 
 
-## Screenshots
+#### Screenshots
 
 ![Screenshots](https://github.com/Sena-dogan/scoob/assets/93337596/3673885d-00ce-400e-a96c-6ffa3ef5db19)
 
