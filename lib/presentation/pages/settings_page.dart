@@ -92,7 +92,7 @@ class PlatformOsVersion extends StatelessWidget {
       title: const Text('OS Version'),
       trailing: Text(
         Platform.isAndroid
-            ? 'Android ${Platform.operatingSystemVersion.split(' ')[2]}'
+            ? 'Android ${Platform.operatingSystemVersion.split(' ')[1]}'
             : 'iOS ${Platform.operatingSystemVersion.split(' ')[1]}',
         style: TextStyle(
           fontSize: 13,
