@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scoob/data/model/dog_model.dart';
-import 'package:scoob/data/repository/dog_repository.dart';
+import 'package:scoob/presentation/widgets/dialog_image.dart';
+import 'package:scoob/presentation/widgets/generate_button.dart';
+import 'package:scoob/presentation/widgets/sub_breed.dart';
 import 'package:scoob/utils/extensions/string_extension.dart';
 
 class DogDialog extends StatelessWidget {
@@ -29,54 +30,8 @@ class DogDialog extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(12),
-                      topRight: Radius.circular(12),
-                    ),
-                    child: Image.network(
-                      dog.image ?? '',
-                      fit: BoxFit.cover,
-                      height: 343,
-                      width: 343,
-                      errorBuilder: (context, msg, object) => const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.error_outline_outlined),
-                              Text(
-                                "This Dog's Image is Missing.",
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 16,
-                    right: 16,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        width: 32,
-                        height: 32,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.close_rounded,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ),
+                  DialogImage(dog: dog),
+                  const CloseDialog(),
                 ],
               ),
               const SizedBox(height: 12),
@@ -121,41 +76,7 @@ class DogDialog extends StatelessWidget {
                 indent: 30,
                 endIndent: 30,
               ),
-              SizedBox(
-                height: 150,
-                width: 343,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: dog.subBreed!.message!.isEmpty
-                      ? 1
-                      : dog.subBreed?.message?.length,
-                  itemBuilder: (context, index) {
-                    if (dog.subBreed?.message?.isEmpty ?? true) {
-                      return const Center(
-                        child: Text(
-                          'No Sub Breed',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      );
-                    }
-                    return Center(
-                      child: Text(
-                        dog.subBreed?.message?[index].capitalize() ??
-                            'Sub Breed',
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
+              DialogSubBreed(dog: dog),
             ],
           ),
         ),
@@ -163,88 +84,40 @@ class DogDialog extends StatelessWidget {
           SizedBox(
             width: 312,
             height: 56,
-            child: ElevatedButton(
-              onPressed: () async {
-                await DogRepository()
-                    .fetchDogImage(dog.breed)
-                    .then((image) => image.message != null
-                        ? showCupertinoModalPopup(
-                            context: context,
-                            barrierDismissible: true,
-                            builder: (context) => Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Center(
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: Image.network(
-                                          image.message ?? '',
-                                          fit: BoxFit.cover,
-                                          height: 256,
-                                          width: 256,
-                                          errorBuilder:
-                                              (context, msg, object) =>
-                                                  const Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 20),
-                                            child: Center(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(Icons
-                                                      .error_outline_outlined),
-                                                  Text(
-                                                    "This Dog's Image is Missing.",
-                                                    textAlign: TextAlign.center,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 12),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Container(
-                                        width: 32,
-                                        height: 32,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(2),
-                                        ),
-                                        child: const Icon(
-                                          Icons.close_rounded,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ))
-                        : null);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF0085FF),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: const Text(
-                'Generate',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
+            child: GenerateButton(dog: dog),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CloseDialog extends StatelessWidget {
+  const CloseDialog({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: 16,
+      right: 16,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Container(
+          width: 32,
+          height: 32,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+          ),
+          child: const Icon(
+            Icons.close_rounded,
+            color: Colors.black,
+          ),
+        ),
       ),
     );
   }
