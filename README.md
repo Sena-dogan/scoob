@@ -17,7 +17,7 @@ Run the app
 flutter run
 ```
 
-## Posible Errors
+## Possible Errors
 If you dont have generated files, you can generate them with this command
 ```bash
 flutter pub run build_runner build
