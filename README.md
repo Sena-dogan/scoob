@@ -4,7 +4,7 @@ A Dog Breeds App.
 
 ## Getting Started
 
-This project is a case study for AppNation by Zeynep Sena Doğan.
+This project is a dog app with using flutter bloc state management by Zeynep Sena Doğan.
 
 ## Getting Started
 Get packages
